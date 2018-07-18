@@ -1,0 +1,8 @@
+spring:
+  application.name: petclinic
+
+petclinic:
+  datasource:
+    url: jdbc:postgresql://localhost/petclinic?currentSchema=public
+    username: postgres
+    password: changeit
