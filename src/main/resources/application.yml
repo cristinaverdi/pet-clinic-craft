@@ -3,6 +3,6 @@ spring:
 
 petclinic:
   datasource:
-    url: jdbc:postgresql://localhost/petclinic?currentSchema=public
+    jdbc-url: jdbc:postgresql://localhost/petclinic?currentSchema=public
     username: postgres
     password: changeit
