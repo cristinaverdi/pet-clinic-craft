@@ -26,12 +26,19 @@ public class OwnersRepository {
 
     public Optional<Owner> findOwnerBy(int ownerId) {
         val entities = jdbcTemplate.query(FIND_OWNER_BY_ID_SQL, new Object[]{ownerId}, new OwnerEntityRowMapper());
-        return !entities.isEmpty() ? Optional.of(ownerFromEntities(entities)) : Optional.empty();
+        return ownerOrEmptyFrom(entities);
     }
 
-    private Owner ownerFromEntities(List<OwnerEntity> entities) {
+    private Optional<Owner> ownerOrEmptyFrom(List<OwnerEntity> entities) {
+        if (entities.isEmpty()) return Optional.empty();
+        val baseOwner = baseOwnerFrom(entities);
+        val owner = addPetsTo(baseOwner, entities);
+        return Optional.of(owner);
+    }
+
+    private Owner baseOwnerFrom(List<OwnerEntity> entities) {
         val baseEntity = entities.get(0);
-        val baseOwner = new Owner(
+        return new Owner(
                 baseEntity.getId(),
                 baseEntity.getFirstName(),
                 baseEntity.getLastName(),
@@ -40,6 +47,9 @@ public class OwnersRepository {
                 baseEntity.getTelephone(),
                 new HashSet<>()
         );
+    }
+
+    private Owner addPetsTo(Owner baseOwner, List<OwnerEntity> entities) {
         return entities.stream().reduce(baseOwner, (owner, entity) -> {
             owner.getPets().add(entity.getPet());
             return owner;
