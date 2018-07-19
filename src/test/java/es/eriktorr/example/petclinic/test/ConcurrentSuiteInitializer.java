@@ -5,7 +5,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
-public abstract class ConcurrentIntegrationBase implements ApplicationContextAware, InitializingBean {
+public abstract class ConcurrentSuiteInitializer implements ApplicationContextAware, InitializingBean {
 
     protected boolean beanInitialized = false;
 

@@ -9,7 +9,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, properties = {
         "petclinic.datasource.jdbc-url=jdbc:postgresql://localhost/petclinic?currentSchema\\=test_${random.value}"
 })
-public abstract class InfrastructureInitializer extends ConcurrentIntegrationBase {
+public abstract class InfrastructureInitializer extends ConcurrentSuiteInitializer {
 
     @LocalServerPort
     protected int port;
