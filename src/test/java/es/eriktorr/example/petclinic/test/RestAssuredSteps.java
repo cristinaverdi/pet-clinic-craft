@@ -1,6 +1,7 @@
 package es.eriktorr.example.petclinic.test;
 
-import es.eriktorr.example.petclinic.Identifiable;
+import es.eriktorr.example.petclinic.core.Identifiable;
+import es.eriktorr.example.petclinic.owners.model.Owner;
 import es.eriktorr.example.petclinic.vets.model.Vet;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
@@ -39,6 +40,17 @@ public class RestAssuredSteps {
         final List<T> actualItems = jsonPath.getList("", identifiableType);
         assertThat(actualItems).as(String.format("Should contain %s items in any order", identifiableType.getSimpleName()))
                 .containsExactlyInAnyOrderElementsOf(expectedItems);
+    }
+
+    public static void thenResponseBodyIsEqualTo(ValidatableResponse validatableResponse, Owner expectedOwner) {
+        thenResponseBodyIsEqualTo(validatableResponse, expectedOwner, Owner.class);
+    }
+
+    private static <T extends Identifiable> void thenResponseBodyIsEqualTo(ValidatableResponse validatableResponse, T expectedItem, Class<T> identifiableType) {
+        val jsonResponse = validatableResponse.extract().asString();
+        val jsonPath = new JsonPath(jsonResponse);
+        val actualItem = jsonPath.getObject("", identifiableType);
+        assertThat(actualItem).isEqualTo(expectedItem);
     }
 
 }

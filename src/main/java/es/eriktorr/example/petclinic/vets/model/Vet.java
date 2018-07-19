@@ -1,6 +1,6 @@
 package es.eriktorr.example.petclinic.vets.model;
 
-import es.eriktorr.example.petclinic.Identifiable;
+import es.eriktorr.example.petclinic.core.Identifiable;
 import lombok.Value;
 
 import java.util.Set;

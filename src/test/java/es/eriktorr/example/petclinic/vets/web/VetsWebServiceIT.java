@@ -22,7 +22,7 @@ import static java.util.Arrays.asList;
 })
 public class VetsWebServiceIT extends ConcurrentIntegrationBase {
 
-    private static final List<Vet> VETS = asList(VET1, VET2, VET3, VET4, VET5, VET6);
+    private static final List<Vet> VETS = asList(VET_1, VET_2, VET_3, VET_4, VET_5, VET_6);
 
     @LocalServerPort
     private int port;
