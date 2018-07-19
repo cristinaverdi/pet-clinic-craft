@@ -19,8 +19,7 @@ public class VetsWebServiceIT extends InfrastructureInitializer {
 
     private static final List<Vet> VETS = asList(VET_1, VET_2, VET_3, VET_4, VET_5, VET_6);
 
-    @Test
-    public void
+    @Test public void
     list_all_veterinarians_and_their_specialties() {
         val response = whenGetJsonRequest(port, "/vets");
         thenResponseStatusIs(response, 200);

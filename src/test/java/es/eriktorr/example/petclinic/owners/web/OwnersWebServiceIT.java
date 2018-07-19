@@ -13,16 +13,14 @@ import static es.eriktorr.example.petclinic.test.RestAssuredSteps.*;
 })
 public class OwnersWebServiceIT extends InfrastructureInitializer {
 
-    @Test
-    public void
+    @Test public void
     view_information_pertaining_to_a_pet_owner() {
         val response = whenGetJsonRequest(port, "/owners/10");
         thenResponseStatusIs(response, 200);
         thenResponseBodyIsEqualTo(response, OWNER_10);
     }
 
-    @Test
-    public void
+    @Test public void
     fail_with_not_found_error_when_no_owner_exists_for_a_given_id() {
         val response = whenGetJsonRequest(port, "/owners/99");
         thenResponseStatusIs(response, 404);
